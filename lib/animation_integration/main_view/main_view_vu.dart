@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:practice/animation_integration/bedroom_view/bedroom_vu.dart';
 import 'package:practice/animation_integration/main_view/main_view_vm.dart';
 import 'package:practice/constants/custom_text.dart';
 import 'package:practice/ui_kit/local_pub.dart';
@@ -12,17 +11,29 @@ class MainView extends StackedView<MainViewModel> {
 
   @override
   Widget builder(BuildContext context, MainViewModel viewModel, Widget? child) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color.fromRGBO(248, 248, 250, 30),
-        body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(248, 248, 250, 30),
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Color.fromRGBO(210, 208, 227, 100),
+                Color.fromRGBO(161, 157, 199, 100),
+                Color.fromRGBO(152, 145, 192, 100),
+              ],
+              tileMode: TileMode.mirror,
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CustomText(
-                    text: 'Manage Home', size: 14, color: Colors.grey),
+                    text: 'Manage Home', size: 14, color: Colors.black87),
                 Row(children: [
                   const CustomText(text: 'Hey,', size: 24),
                   const Expanded(
@@ -40,11 +51,6 @@ class MainView extends StackedView<MainViewModel> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const BedRoomVU();
-          }));
-        }),
       ),
     );
   }

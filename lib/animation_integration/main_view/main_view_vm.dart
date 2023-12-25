@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice/animation_integration/bedroom_view/bedroom_vu.dart';
+import 'package:practice/animation_integration/bedroom_view/animate_screen.dart';
 import 'package:practice/animation_integration/model/model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -38,7 +38,7 @@ class MainViewModel extends BaseViewModel {
       portionName: 'Bed Room',
       colors: Colors.blue.shade400,
       switchState: false,
-      route: const BedRoomVU(),
+      route: const AnimationScreen(),
     ),
     RoomCondition(
       roomCondIcon: Icons.air,

@@ -1,5 +1,3 @@
 import 'package:stacked/stacked.dart';
 
-class BedRoomVM extends BaseViewModel {
-  BedRoomVM();
-}
+class BedRoomVM extends BaseViewModel {}
