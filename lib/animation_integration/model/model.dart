@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 
 class PortionsModel {
   String? portionName;
+  bool isSelected;
 
-  PortionsModel({this.portionName});
+  PortionsModel({
+    this.portionName,
+    this.isSelected = false,
+  });
 }
 
 class RoomCondition {
   IconData? roomCondIcon;
-  IconData? deviceIcon;
   String? roomCond;
   String? portionName;
   bool switchState;
   Color? colors;
+  Widget route;
 
   RoomCondition({
     this.roomCondIcon,
-    this.deviceIcon,
     this.roomCond,
     this.portionName,
     this.switchState = false,
     this.colors,
+    required this.route,
   });
 }

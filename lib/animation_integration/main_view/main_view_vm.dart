@@ -1,53 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:practice/animation_integration/bedroom_view/bedroom_vu.dart';
 import 'package:practice/animation_integration/model/model.dart';
 import 'package:stacked/stacked.dart';
 
+import 'main_view_vu.dart';
+
 class MainViewModel extends BaseViewModel {
-  bool switchStates = true;
-  onChanged(bool value) {
-    switchStates = value;
+  onChanged(value, int index) {
+    roomCondition[index].switchState = value;
     notifyListeners();
   }
 
-  MainViewModel();
+  int selectedItemIndex = -1;
+
+  void onSelectedItem(int index) {
+    if (selectedItemIndex == index) {
+      selectedItemIndex = -1;
+    } else {
+      selectedItemIndex = index;
+    }
+
+    notifyListeners();
+    debugPrint('pressed');
+  }
 
   List<PortionsModel> portionList = [
-    PortionsModel(portionName: 'All'),
-    PortionsModel(portionName: 'Living Room'),
-    PortionsModel(portionName: 'Bedroom'),
-    PortionsModel(portionName: 'Kitchen'),
-    PortionsModel(portionName: 'Hall'),
-    PortionsModel(portionName: 'Washroom'),
+    PortionsModel(portionName: 'All', isSelected: false),
+    PortionsModel(portionName: 'Living Room', isSelected: false),
+    PortionsModel(portionName: 'Bedroom', isSelected: false),
+    PortionsModel(portionName: 'Kitchen', isSelected: false),
   ];
 
   List<RoomCondition> roomCondition = [
     RoomCondition(
       roomCondIcon: Icons.light,
-      deviceIcon: Icons.wifi,
       roomCond: 'Smart Lightining',
       portionName: 'Bed Room',
       colors: Colors.blue.shade400,
+      switchState: false,
+      route: const BedRoomVU(),
     ),
     RoomCondition(
       roomCondIcon: Icons.air,
-      deviceIcon: Icons.bluetooth,
       roomCond: 'Air Condition',
       portionName: 'Living Room',
-      colors: const Color.fromRGBO(241, 241, 246, 255),
+      colors: const Color.fromRGBO(102, 81, 76, 1),
+      switchState: false,
+      route: const MainView(),
     ),
     RoomCondition(
       roomCondIcon: Icons.directions_walk,
-      deviceIcon: Icons.bluetooth,
       roomCond: 'Motion Sensors',
       portionName: 'Kitchen',
       colors: Colors.orange.shade400,
+      switchState: false,
+      route: const MainView(),
     ),
     RoomCondition(
       roomCondIcon: Icons.desk,
-      deviceIcon: Icons.wifi,
       roomCond: 'Desk Lamp',
       portionName: 'Bedroom',
       colors: Colors.deepPurple.shade400,
+      switchState: false,
+      route: const MainView(),
     ),
   ];
 }
