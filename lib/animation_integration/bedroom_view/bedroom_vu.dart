@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice/animation_integration/bedroom_view/bedroom_vm.dart';
 import 'package:stacked/stacked.dart';
+import 'package:typethis/typethis.dart';
 
 class BedRoomVU extends StackedView<BedRoomVM> {
   const BedRoomVU({super.key});
@@ -25,6 +26,19 @@ class BedRoomVU extends StackedView<BedRoomVM> {
                 ],
                 tileMode: TileMode.mirror,
               ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: TypeThis(
+                    string: 'contents will be available soon',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                    speed: 50,
+                  ),
+                ),
+              ],
             ),
           ));
 
