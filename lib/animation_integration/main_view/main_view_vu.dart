@@ -11,24 +11,25 @@ class MainView extends StackedView<MainViewModel> {
 
   @override
   Widget builder(BuildContext context, MainViewModel viewModel, Widget? child) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(248, 248, 250, 30),
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color.fromRGBO(210, 208, 227, 100),
-                Color.fromRGBO(161, 157, 199, 100),
-                Color.fromRGBO(152, 145, 192, 100),
-              ],
-              tileMode: TileMode.mirror,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color.fromRGBO(248, 248, 250, 30),
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.sizeOf(context).height,
+            padding: const EdgeInsets.only(left: 12, right: 12, top: 24),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  Color.fromRGBO(210, 208, 227, 100),
+                  Color.fromRGBO(161, 157, 199, 100),
+                  Color.fromRGBO(152, 145, 192, 100),
+                ],
+                tileMode: TileMode.mirror,
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 28),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -43,9 +44,9 @@ class MainView extends StackedView<MainViewModel> {
                 ]),
                 20.spaceY,
                 tempCard(),
-                12.spaceY,
+                4.spaceY,
                 portionCardList(viewModel, context),
-                12.spaceY,
+                4.spaceY,
                 portionGridList(viewModel, context),
               ],
             ),
@@ -82,7 +83,7 @@ class MainView extends StackedView<MainViewModel> {
             : Colors.white70,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -121,7 +122,6 @@ class MainView extends StackedView<MainViewModel> {
                   ? Colors.white
                   : Colors.black,
             ),
-
             CustomText(
               text: '${viewModel.roomCondition[index].portionName}',
               size: 14,
@@ -129,7 +129,7 @@ class MainView extends StackedView<MainViewModel> {
                   ? Colors.white
                   : Colors.grey.shade700,
             ),
-            // const Divider(),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -162,7 +162,7 @@ class MainView extends StackedView<MainViewModel> {
       children: [
         CircleAvatar(
           backgroundColor: Colors.white70,
-          radius: 40,
+          radius: 32,
           child: Icon(
             Icons.person_outline,
             color: Colors.grey.shade300,
@@ -171,9 +171,10 @@ class MainView extends StackedView<MainViewModel> {
         ),
         const CircleAvatar(
           backgroundColor: Colors.grey,
-          radius: 12,
+          radius: 10,
           child: Icon(
             Icons.add,
+            size: 16,
           ),
         ),
       ],
@@ -198,7 +199,7 @@ class MainView extends StackedView<MainViewModel> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: viewModel.selectedItemIndex == index
-                        ? Colors.black45
+                        ? Colors.black12
                         : Colors.white70,
                     borderRadius: const BorderRadius.all(Radius.circular(32))),
                 child: Padding(
@@ -264,15 +265,3 @@ class MainView extends StackedView<MainViewModel> {
   @override
   MainViewModel viewModelBuilder(BuildContext context) => MainViewModel();
 }
-
-// decoration: const BoxDecoration(
-//   gradient: LinearGradient(
-//     colors: [
-//       Color.fromRGBO(224, 222, 234, 255),
-//       Color.fromRGBO(196, 192, 218, 255),
-//       Color.fromRGBO(154, 145, 191, 255),
-//     ],
-//     begin: Alignment.topCenter,
-//     end: Alignment.bottomCenter,
-//   ),
-// ),
