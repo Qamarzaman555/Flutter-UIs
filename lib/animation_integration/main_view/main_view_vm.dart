@@ -3,6 +3,7 @@ import 'package:practice/animation_integration/bedroom_view/animate_screen.dart'
 import 'package:practice/animation_integration/model/model.dart';
 import 'package:stacked/stacked.dart';
 
+import '../bedroom_view/animate_vu.dart';
 import 'main_view_vu.dart';
 
 class MainViewModel extends BaseViewModel {
@@ -46,7 +47,7 @@ class MainViewModel extends BaseViewModel {
       portionName: 'Living Room',
       colors: const Color.fromRGBO(102, 81, 76, 1),
       switchState: false,
-      route: const MainView(),
+      route: const Transition(),
     ),
     RoomCondition(
       roomCondIcon: Icons.directions_walk,
