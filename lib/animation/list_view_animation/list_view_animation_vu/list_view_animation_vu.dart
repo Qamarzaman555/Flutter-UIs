@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:practice/animation/chi_animated_list_view/chi_animated_list_view.dart';
 import 'package:practice/animation/list_view_animation/list_view_animation_vu/list_view_animation_vm.dart';
 import 'package:stacked/stacked.dart';
@@ -21,7 +20,7 @@ class ListViewAnimationVU extends StackedView<ListViewAnimationVM> {
         ),
         body: CHIAnimatedListView(
             itemCount: viewModel.listModel.length,
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Text('${viewModel.listModel[index].name}'),
