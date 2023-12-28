@@ -27,7 +27,7 @@ class _IconAnimationState extends State<IconAnimation>
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
       curve: Curves.linear,
       child: AnimatedIcon(
         icon: AnimatedIcons.menu_home,
