@@ -4,23 +4,27 @@ import 'uk_anim_controller.dart';
 
 class AnimatedButtonVM extends BaseViewModel {
   late UKAnimController ukWidthAnim;
-  late UKAnimController ukOpacityAnim;
+  late UKAnimController ukProgresOpacityAnim;
   late UKAnimController ukTickOpacityAnim;
   bool loadingInProgress = false;
 
   void initializeAnimationController() {
     ukWidthAnim =
         UKAnimController(duration: 300, tweenStart: 300, tweenEnd: 65);
-    ukOpacityAnim = UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
+    ukProgresOpacityAnim = UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
     ukTickOpacityAnim = UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
 
 
     ukWidthAnim.controller.addStatusListener((status) async {
-      print("ukWidthAnim status: $status");
+
+      debugPrint("ukWidthAnim status: $status");
+      // debugPrint("ukWidthAnim status: $status");
       if (status == AnimationStatus.completed) {
         if (loadingInProgress == true) {
-          ukOpacityAnim.controller.forward();
-          await Future.delayed(const Duration(milliseconds: 500));
+
+          ukProgresOpacityAnim.controller.forward();
+          await Future.delayed(const Duration(milliseconds: 1200));
+
           ukTickOpacityAnim.controller.forward();
         } else {
           ukWidthAnim.controller.reverse();
@@ -28,8 +32,14 @@ class AnimatedButtonVM extends BaseViewModel {
       }
     });
 
+    ukProgresOpacityAnim.controller.addStatusListener((status) { 
+      debugPrint("ukProgresOpacityAnim status: $status");
+      // if(status == AnimationStatus.completed){}
+     });
+
     ukTickOpacityAnim.controller.addStatusListener((status)  {
-      print("ukTickOpacity status: $status");
+      debugPrint("ukTickOpacityAnim status: $status");
+
 
       if (status == AnimationStatus.dismissed) {
         ukWidthAnim.controller.reverse();
@@ -50,10 +60,10 @@ class AnimatedButtonVM extends BaseViewModel {
   callApi() async {
     ukWidthAnim.forward();
     loadingInProgress = true;
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     loadingInProgress = false;
-    print("Loading complete .....");
-    ukOpacityAnim.controller.reverse();
+    // print("Loading complete .....");
+    ukProgresOpacityAnim.controller.reverse();
     await Future.delayed(const Duration(seconds: 1));
     ukTickOpacityAnim.controller.reverse();
 

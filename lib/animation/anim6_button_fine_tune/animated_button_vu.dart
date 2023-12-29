@@ -38,7 +38,14 @@ class AnimatedButtonVU extends StackedView<AnimatedButtonVM> {
                               child: TickIndicator(),
                             );
                           }),
-            ProgressIndicator(),
+            AnimatedBuilder(
+                          animation: viewModel.ukProgresOpacityAnim.controller,
+                          builder: (context, snapshot) {
+                            return Opacity(
+                              opacity: viewModel.ukProgresOpacityAnim.tween.value,
+                              child: ProgressIndicator(),
+                            );
+                          }),
             AnimatedBuilder(
               animation: viewModel.ukWidthAnim.controller,
               builder: (_, value) {
@@ -58,10 +65,10 @@ class AnimatedButtonVU extends StackedView<AnimatedButtonVM> {
                             );
                           }),
                       AnimatedBuilder(
-                          animation: viewModel.ukOpacityAnim.controller,
+                          animation: viewModel.ukProgresOpacityAnim.controller,
                           builder: (context, snapshot) {
                             return Opacity(
-                              opacity: viewModel.ukOpacityAnim.tween.value,
+                              opacity: viewModel.ukProgresOpacityAnim.tween.value,
                               child: ProgressIndicator(),
                             );
                           }),
