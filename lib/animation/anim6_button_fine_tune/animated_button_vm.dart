@@ -23,7 +23,7 @@ class AnimatedButtonVM extends BaseViewModel {
         if (loadingInProgress == true) {
 
           ukProgresOpacityAnim.controller.forward();
-          await Future.delayed(const Duration(milliseconds: 1200));
+          await Future.delayed(const Duration(seconds: 1));
 
           ukTickOpacityAnim.controller.forward();
         } else {

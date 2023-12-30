@@ -66,6 +66,7 @@ dependencies:
   page_view_dot_indicator: ^2.3.0
   typethis: ^0.3.0
   flutter_staggered_animations: ^1.1.1
+  progress_state_button: ^1.0.4
 
 dev_dependencies:
   flutter_test:

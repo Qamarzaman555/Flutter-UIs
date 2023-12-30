@@ -35,7 +35,7 @@ class AnimatedButtonVU extends StackedView<AnimatedButtonVM> {
                           builder: (context, snapshot) {
                             return Opacity(
                               opacity: viewModel.ukTickOpacityAnim.tween.value,
-                              child: TickIndicator(),
+                              child: TickIndicator(viewModel: viewModel,),
                             );
                           }),
             AnimatedBuilder(
@@ -61,7 +61,7 @@ class AnimatedButtonVU extends StackedView<AnimatedButtonVM> {
                           builder: (context, snapshot) {
                             return Opacity(
                               opacity: viewModel.ukTickOpacityAnim.tween.value,
-                              child: TickIndicator(),
+                              child: TickIndicator(viewModel: viewModel),
                             );
                           }),
                       AnimatedBuilder(
@@ -128,7 +128,9 @@ class ProgressIndicator extends StatelessWidget {
 
 
 class TickIndicator extends StatelessWidget {
-  const TickIndicator({
+  AnimatedButtonVM viewModel;
+   TickIndicator({
+    required this.viewModel,
     super.key,
   });
 
@@ -140,7 +142,7 @@ class TickIndicator extends StatelessWidget {
           borderRadius: BorderRadius.circular(50)),
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: Icon(Icons.done,color: Colors.white,size: 36,)
+        child: Transform.scale(scale: viewModel.ukTickOpacityAnim.tween.value,child: Icon(Icons.done,color: Colors.white,size: 36,))
       ),
     );
   }
