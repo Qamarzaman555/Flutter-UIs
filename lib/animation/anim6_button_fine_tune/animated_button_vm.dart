@@ -8,20 +8,21 @@ class AnimatedButtonVM extends BaseViewModel {
   late UKAnimController ukTickOpacityAnim;
   bool loadingInProgress = false;
 
+  var successStatus;
+
   void initializeAnimationController() {
     ukWidthAnim =
         UKAnimController(duration: 300, tweenStart: 300, tweenEnd: 65);
-    ukProgresOpacityAnim = UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
-    ukTickOpacityAnim = UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
-
+    ukProgresOpacityAnim =
+        UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
+    ukTickOpacityAnim =
+        UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
 
     ukWidthAnim.controller.addStatusListener((status) async {
-
       debugPrint("ukWidthAnim status: $status");
       // debugPrint("ukWidthAnim status: $status");
       if (status == AnimationStatus.completed) {
         if (loadingInProgress == true) {
-
           ukProgresOpacityAnim.controller.forward();
           await Future.delayed(const Duration(seconds: 1));
 
@@ -32,23 +33,18 @@ class AnimatedButtonVM extends BaseViewModel {
       }
     });
 
-    ukProgresOpacityAnim.controller.addStatusListener((status) { 
+    ukProgresOpacityAnim.controller.addStatusListener((status) {
       debugPrint("ukProgresOpacityAnim status: $status");
       // if(status == AnimationStatus.completed){}
-     });
+    });
 
-    ukTickOpacityAnim.controller.addStatusListener((status)  {
+    ukTickOpacityAnim.controller.addStatusListener((status) {
       debugPrint("ukTickOpacityAnim status: $status");
-
 
       if (status == AnimationStatus.dismissed) {
         ukWidthAnim.controller.reverse();
       }
     });
-
-   
-
-   
   }
 
   @override
@@ -66,11 +62,5 @@ class AnimatedButtonVM extends BaseViewModel {
     ukProgresOpacityAnim.controller.reverse();
     await Future.delayed(const Duration(seconds: 1));
     ukTickOpacityAnim.controller.reverse();
-
-    
-
-    
-
-    
   }
 }

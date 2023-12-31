@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -31,22 +33,6 @@ class AnimatedButtonVU extends StackedView<AnimatedButtonVM> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             AnimatedBuilder(
-                          animation: viewModel.ukTickOpacityAnim.controller,
-                          builder: (context, snapshot) {
-                            return Opacity(
-                              opacity: viewModel.ukTickOpacityAnim.tween.value,
-                              child: TickIndicator(viewModel: viewModel,),
-                            );
-                          }),
-            AnimatedBuilder(
-                          animation: viewModel.ukProgresOpacityAnim.controller,
-                          builder: (context, snapshot) {
-                            return Opacity(
-                              opacity: viewModel.ukProgresOpacityAnim.tween.value,
-                              child: ProgressIndicator(),
-                            );
-                          }),
-            AnimatedBuilder(
               animation: viewModel.ukWidthAnim.controller,
               builder: (_, value) {
                 return SizedBox(
@@ -56,19 +42,31 @@ class AnimatedButtonVU extends StackedView<AnimatedButtonVM> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      AnimatedBuilder(
-                          animation: viewModel.ukTickOpacityAnim.controller,
-                          builder: (context, snapshot) {
-                            return Opacity(
-                              opacity: viewModel.ukTickOpacityAnim.tween.value,
-                              child: TickIndicator(viewModel: viewModel),
-                            );
-                          }),
+                      viewModel.successStatus = Random.secure().nextBool()
+                          ? AnimatedBuilder(
+                              animation: viewModel.ukTickOpacityAnim.controller,
+                              builder: (context, snapshot) {
+                                return Opacity(
+                                  opacity:
+                                      viewModel.ukTickOpacityAnim.tween.value,
+                                  child: TickIndicator(viewModel: viewModel),
+                                );
+                              })
+                          : AnimatedBuilder(
+                              animation: viewModel.ukTickOpacityAnim.controller,
+                              builder: (context, snapshot) {
+                                return Opacity(
+                                  opacity:
+                                      viewModel.ukTickOpacityAnim.tween.value,
+                                  child: CrossIndicator(viewModel: viewModel),
+                                );
+                              }),
                       AnimatedBuilder(
                           animation: viewModel.ukProgresOpacityAnim.controller,
                           builder: (context, snapshot) {
                             return Opacity(
-                              opacity: viewModel.ukProgresOpacityAnim.tween.value,
+                              opacity:
+                                  viewModel.ukProgresOpacityAnim.tween.value,
                               child: ProgressIndicator(),
                             );
                           }),
@@ -90,7 +88,14 @@ class AnimatedButtonVU extends StackedView<AnimatedButtonVM> {
           textStyle: TextStyle(fontSize: 24, color: Colors.white),
           minimumSize: Size.fromHeight(72),
           shape: StadiumBorder()),
-      child: FittedBox(child: Text("Pay Now")),
+      child: FittedBox(
+          child: AnimatedBuilder(
+              animation: viewModel.ukWidthAnim.controller,
+              builder: (context, snapshot) {
+                return Opacity(
+                    opacity: viewModel.ukWidthAnim.tween.value / 300,
+                    child: Text("Pay Now"));
+              })),
       onPressed: () async {
         viewModel.callApi();
       },
@@ -112,8 +117,7 @@ class ProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(50)),
+          color: Colors.blue, borderRadius: BorderRadius.circular(50)),
       child: Padding(
         padding: EdgeInsets.all(10),
         child: CircularProgressIndicator(
@@ -126,10 +130,9 @@ class ProgressIndicator extends StatelessWidget {
   }
 }
 
-
 class TickIndicator extends StatelessWidget {
   AnimatedButtonVM viewModel;
-   TickIndicator({
+  TickIndicator({
     required this.viewModel,
     super.key,
   });
@@ -138,12 +141,39 @@ class TickIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.circular(50)),
+          color: Colors.green, borderRadius: BorderRadius.circular(50)),
       child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Transform.scale(scale: viewModel.ukTickOpacityAnim.tween.value,child: Icon(Icons.done,color: Colors.white,size: 36,))
-      ),
+          padding: EdgeInsets.all(10),
+          child: Transform.scale(
+              scale: viewModel.ukTickOpacityAnim.tween.value,
+              child: Icon(
+                Icons.done,
+                color: Colors.white,
+                size: 36,
+              ))),
+    );
+  }
+}
+
+class CrossIndicator extends StatelessWidget {
+  AnimatedButtonVM viewModel;
+
+  CrossIndicator({required this.viewModel, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.red, borderRadius: BorderRadius.circular(50)),
+      child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Transform.scale(
+              scale: viewModel.ukTickOpacityAnim.tween.value,
+              child: Icon(
+                Icons.close,
+                color: Colors.white,
+                size: 36,
+              ))),
     );
   }
 }
