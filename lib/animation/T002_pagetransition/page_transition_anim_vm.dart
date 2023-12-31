@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'uk_anim_controller.dart';
 
 class PageTransitionAnimVM extends BaseViewModel {
+  bool value = true;
   late UKAnimController animation1;
 
   void initializeAnimationController() {
@@ -10,8 +11,8 @@ class PageTransitionAnimVM extends BaseViewModel {
 
     animation1.controller.addStatusListener((status) {
       debugPrint('animation1: $status');
-      if (status == AnimationStatus.completed) {
-        // value = true;
+      if (status == AnimationStatus.dismissed) {
+        value = true;
       }
     });
   }
