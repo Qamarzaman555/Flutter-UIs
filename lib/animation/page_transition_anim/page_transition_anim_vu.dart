@@ -35,19 +35,6 @@ class PageTransitionAnimVU extends StackedView<PageTransitionAnimVM> {
             size: 50,
           ),
           profileCard(viewModel),
-          // DraggableScrollableSheet(
-          //     builder: (BuildContext context, ScrollController controller) {
-          //   return Container(
-          //     color: Colors.amber,
-          //     child: ListView.builder(
-          //         itemCount: 4,
-          //         itemBuilder: (context, index) {
-          //           return ListTile(
-          //             leading: Text('Index $index'),
-          //           );
-          //         }),
-          //   );
-          // }),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -86,7 +73,7 @@ class PageTransitionAnimVU extends StackedView<PageTransitionAnimVM> {
             ),
             child: Center(
               child: Transform.scale(
-                scale: viewModel.animation1.tween.value / 16,
+                scale: viewModel.animation1.tween.value / 20,
                 child: Container(
                   width: MediaQuery.sizeOf(context).width / 2,
                   height: MediaQuery.sizeOf(context).height / 2,
