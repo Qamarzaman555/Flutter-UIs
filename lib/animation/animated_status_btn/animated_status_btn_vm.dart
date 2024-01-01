@@ -1,21 +1,22 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
+import 'package:practice/1_uk_animated_controller/uk_anim_controller.dart';
 import 'package:stacked/stacked.dart';
-import 'uk_anim_controller.dart';
 
 class AnimatedButtonVM extends BaseViewModel {
   late UKAnimController ukWidthAnim;
-  late UKAnimController ukProgresOpacityAnim;
-  late UKAnimController ukTickOpacityAnim;
+  late UKAnimController loadingOpacityController;
+  late UKAnimController resultOpacityController;
   bool loadingInProgress = false;
-
   var successStatus;
 
   void initializeAnimationController() {
     ukWidthAnim =
         UKAnimController(duration: 300, tweenStart: 300, tweenEnd: 65);
-    ukProgresOpacityAnim =
+    loadingOpacityController =
         UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
-    ukTickOpacityAnim =
+    resultOpacityController =
         UKAnimController(duration: 300, tweenStart: 0, tweenEnd: 1);
 
     ukWidthAnim.controller.addStatusListener((status) async {
@@ -23,23 +24,23 @@ class AnimatedButtonVM extends BaseViewModel {
       // debugPrint("ukWidthAnim status: $status");
       if (status == AnimationStatus.completed) {
         if (loadingInProgress == true) {
-          ukProgresOpacityAnim.controller.forward();
+          loadingOpacityController.controller.forward();
           await Future.delayed(const Duration(seconds: 1));
 
-          ukTickOpacityAnim.controller.forward();
+          resultOpacityController.controller.forward();
         } else {
           ukWidthAnim.controller.reverse();
         }
       }
     });
 
-    ukProgresOpacityAnim.controller.addStatusListener((status) {
+    loadingOpacityController.controller.addStatusListener((status) {
       debugPrint("ukProgresOpacityAnim status: $status");
       // if(status == AnimationStatus.completed){}
     });
 
-    ukTickOpacityAnim.controller.addStatusListener((status) {
-      debugPrint("ukTickOpacityAnim status: $status");
+    resultOpacityController.controller.addStatusListener((status) {
+      debugPrint("resultOpacityController status: $status");
 
       if (status == AnimationStatus.dismissed) {
         ukWidthAnim.controller.reverse();
@@ -59,8 +60,8 @@ class AnimatedButtonVM extends BaseViewModel {
     await Future.delayed(const Duration(seconds: 1));
     loadingInProgress = false;
     // print("Loading complete .....");
-    ukProgresOpacityAnim.controller.reverse();
+    loadingOpacityController.controller.reverse();
     await Future.delayed(const Duration(seconds: 1));
-    ukTickOpacityAnim.controller.reverse();
+    resultOpacityController.controller.reverse();
   }
 }

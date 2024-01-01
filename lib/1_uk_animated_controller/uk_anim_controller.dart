@@ -21,6 +21,10 @@ class UKAnimController {
     controller.forward();
   }
 
+  reverse() {
+    controller.reverse();
+  }
+
   dispose() {
     controller.dispose();
   }
