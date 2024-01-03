@@ -1,8 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../patient_model/patient_model.dart';
+import 'patient_models./patient_models.dart';
 
 class PatientsNavVM extends BaseViewModel {
+  PatientsNavVM() {
+    getRepeatList(dataSet);
+  }
+
+  //actually methid call ni hwa
   List<PatientModel> searchedPatients = [];
 
   List<PatientModel> patientsList = [
@@ -54,5 +61,38 @@ class PatientsNavVM extends BaseViewModel {
       searchedPatients.clear();
     }
     notifyListeners();
+  }
+
+  //yes
+
+  // List<Data> dataSet = [
+  //   Data(name: 'Qamar'),
+  //   Data(name: 'Ali'),
+  //   Data(name: 'Abbas'),
+  // ];
+  // List<Widget> repeatList = [];
+  // List<Widget>? getRepeatList(List<Data> dataSet) {
+  //   Widget data;
+  //   for (int i = 0; i < dataSet.length; i++) {
+  //     data = Text('${dataSet[i].name}');
+  //     repeatList.add(data);
+  //   }
+  //   debugPrint('${repeatList.first}');
+  //   return repeatList;
+  // }
+
+  List<Data> dataSet = [
+    Data(name: 'Qamar'),
+    Data(name: 'Ali'),
+    Data(name: 'Abbas'),
+  ];
+
+  List<Widget> repeatList = [];
+  List<Widget>? getRepeatList(List<Data> dataSet) {
+    for (int i = 0; i < dataSet.length; i++) {
+      repeatList.add(Text('${dataSet[i].name}'));
+    }
+    debugPrint('${repeatList.first}');
+    return repeatList;
   }
 }
