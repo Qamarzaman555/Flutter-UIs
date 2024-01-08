@@ -41,7 +41,7 @@ class EasyPaisaView extends StackedView<EasyPaisaViewModel> {
         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
       ),
       leading: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10),
         child: Stack(
           children: [
             Container(

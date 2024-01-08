@@ -16,10 +16,10 @@ class EasyPaisaViewModel extends BaseViewModel {
   List<EasyPaisaCard> easypaisaCards = [
     EasyPaisaCard(name: 'Send Money', icon: Icons.send_to_mobile_outlined),
     EasyPaisaCard(name: 'Bill Payment', icon: Icons.payment),
-    EasyPaisaCard(name: 'Mobile Packeges', icon: Icons.mobile_screen_share),
+    EasyPaisaCard(name: 'Mobile pckgs', icon: Icons.mobile_screen_share),
     EasyPaisaCard(name: 'Send Money', icon: Icons.send_to_mobile_outlined),
     EasyPaisaCard(name: 'Bill Payment', icon: Icons.payment),
-    EasyPaisaCard(name: 'Mobile Packeges', icon: Icons.mobile_screen_share),
+    EasyPaisaCard(name: 'Mobile pckgs', icon: Icons.mobile_screen_share),
   ];
 
   List<EasyPaisaCard> gridView1 = [

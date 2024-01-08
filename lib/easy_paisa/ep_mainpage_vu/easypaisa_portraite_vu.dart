@@ -67,7 +67,7 @@ class EasyPaisaPortraiteView extends StatelessWidget {
                   height: MediaQuery.sizeOf(context).height / 28,
                   width: MediaQuery.sizeOf(context).width / 3.6,
                 ),
-                12.spaceY,
+                8.spaceY,
                 const Text(
                   "QAMAR ZAMAN",
                 ),
@@ -76,7 +76,7 @@ class EasyPaisaPortraiteView extends StatelessWidget {
                   "03159392193",
                   style: CHIStyles.displayXsBoldStyle,
                 ),
-                4.spaceY,
+                // 2.spaceY,
                 Text(
                   "Sign in to your easypaisa account",
                   style: CHIStyles.xsNormalStyle,
